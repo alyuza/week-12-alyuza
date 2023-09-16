@@ -32,10 +32,10 @@ const Wrapper = () => {
         < PersonalInformation onNext={handleNext} />
       )}
       {step === 2 && (
-        <AddressInformation onNext={handleNext} onPrev={handlePrev}/>
+        <AddressInformation onNext={handleNext} onPrev={handlePrev} />
       )}
       {step === 3 && (
-        <AccountInformation />
+        <AccountInformation onPrev={handlePrev} />
       )}
     </>
   )

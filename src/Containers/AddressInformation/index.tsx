@@ -1,5 +1,5 @@
 import { Text } from '../../components';
-import { Input, Button } from 'antd';
+import { Input, Button, Card } from 'antd';
 import { useFormik } from 'formik';
 import React from 'react';
 import * as yup from 'yup'
@@ -12,15 +12,15 @@ interface AddressPage {
 }
 
 interface AddressWrapper {
-  onNext:()=> void;
-  onPrev:()=> void;
+  onNext: () => void;
+  onPrev: () => void;
 }
 
 const initialValues = {
-  streetAddress: '',
-  city: '',
-  state: '',
-  zipCode: ''
+  streetAddress: '441 4th Street, NW',
+  city: 'Los Angeles',
+  state: 'United States',
+  zipCode: '99501'
 }
 
 const validationSchema = yup.object({
@@ -40,7 +40,7 @@ const validationSchema = yup.object({
     .matches(/^[0-9]{5}/)
 })
 
-const AddressInformation : React.FC<AddressWrapper> = ({onNext,onPrev}) => {
+const AddressInformation: React.FC<AddressWrapper> = ({ onNext, onPrev }) => {
 
   const handleSubmit = (values: AddressPage) => {
     console.log(values)
@@ -52,67 +52,67 @@ const AddressInformation : React.FC<AddressWrapper> = ({onNext,onPrev}) => {
     validationSchema: validationSchema,
   });
 
-  const handleNext =() =>{
-    if (formMik.isValid){
+  const handleNext = () => {
+
+    if (formMik.isValid) {
       onNext();
     }
   }
 
   return (
-    <form onSubmit={formMik.handleSubmit}>
-      <div>
-        <Text>Street Address: </Text>
-        <Input name={'streetAddress'}
-          value={formMik.values.streetAddress}
-          onChange={formMik.handleChange('streetAddress')}
-          status={formMik.errors.streetAddress && 'error'}
-          placeholder='Semolowaru Indah II'
-        />
-        {formMik.errors.streetAddress && (
-          <Text>{formMik.errors.streetAddress}</Text>
-        )}
-      </div>
-      <div>
-        <Text>City: </Text>
-        <Input name={'city'}
-          value={formMik.values.city}
-          onChange={formMik.handleChange('city')}
-          status={formMik.errors.city && 'error'}
-          placeholder='Surabaya'
-        />
-        {formMik.errors.city && (
-          <Text>{formMik.errors.city}</Text>
-        )}
-      </div>
-      <div>
-        <Text>State: </Text>
-        <Input name={'state'}
-          value={formMik.values.state}
-          onChange={formMik.handleChange('state')}
-          status={formMik.errors.state && 'error'}
-          placeholder='Indonesia'
-        />
-        {formMik.errors.state && (
-          <Text>{formMik.errors.state}</Text>
-        )}
-      </div>
-      <div>
-        <Text>Zip Code: </Text>
-        <Input name={'zipCode'}
-          value={formMik.values.zipCode}
-          onChange={formMik.handleChange('zipCode')}
-          status={formMik.errors.zipCode && 'error'}
-          placeholder='60119'
-        />
-        {formMik.errors.zipCode && (
-          <Text>{formMik.errors.zipCode}</Text>
-        )}
-      </div>
-      <Button type={'primary'} htmlType={"submit"} onClick={onPrev}>Previous</Button>
-      <Button type={'primary'} htmlType={"submit"} onClick={handleNext}>Next</Button>
-    </form>
+    <Card title={'Address Information'}>
+      <form>
+        <div>
+          <Text>Street Address: </Text>
+          <Input name={'streetAddress'}
+            value={formMik.values.streetAddress}
+            onChange={formMik.handleChange('streetAddress')}
+            status={formMik.errors.streetAddress && 'error'}
+          />
+          {formMik.errors.streetAddress && (
+            <Text>{formMik.errors.streetAddress}</Text>
+          )}
+        </div>
+        <div>
+          <Text>City: </Text>
+          <Input name={'city'}
+            value={formMik.values.city}
+            onChange={formMik.handleChange('city')}
+            status={formMik.errors.city && 'error'}
+          />
+          {formMik.errors.city && (
+            <Text>{formMik.errors.city}</Text>
+          )}
+        </div>
+        <div>
+          <Text>State: </Text>
+          <Input name={'state'}
+            value={formMik.values.state}
+            onChange={formMik.handleChange('state')}
+            status={formMik.errors.state && 'error'}
+          />
+          {formMik.errors.state && (
+            <Text>{formMik.errors.state}</Text>
+          )}
+        </div>
+        <div>
+          <Text>Zip Code: </Text>
+          <Input name={'zipCode'}
+            value={formMik.values.zipCode}
+            onChange={formMik.handleChange('zipCode')}
+            status={formMik.errors.zipCode && 'error'}
+          />
+          {formMik.errors.zipCode && (
+            <Text>{formMik.errors.zipCode}</Text>
+          )}
+        </div>
+        <Button type={'primary'} htmlType={"submit"} onClick={onPrev}
+          style={{ margin: '12px' }}>Previous</Button>
+        <Button type={'primary'} htmlType={"submit"} onClick={handleNext}
+          style={{ margin: '12px' }}>Next</Button>
+      </form>
+    </Card>
   )
 }
-
 
 export default AddressInformation

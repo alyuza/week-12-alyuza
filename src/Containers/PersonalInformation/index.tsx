@@ -1,18 +1,20 @@
+import React from 'react';
 import { Text } from '../../components';
-import { Input, Button } from 'antd';
+import { Card, Button, Form, Input } from 'antd';
 import { useFormik } from 'formik';
+import { DatePicker } from 'antd';
 import * as yup from 'yup'
 
 interface PersonalPage {
   fullName: string;
   emailAddress: string;
-  dateOfBirth: string;
+  dateOfBirth: Date;
 }
 
 const initialValues = {
-  fullName: '',
-  emailAddress: '',
-  dateOfBirth: ''
+  fullName: 'Steve Jobs',
+  emailAddress: 'email@example.com',
+  dateOfBirth: new Date()
 }
 
 interface PersonalWrapper {
@@ -28,15 +30,12 @@ const validationSchema = yup.object({
     .email("Please insert a valid email address")
     .required("Email address can't be blank"),
   dateOfBirth: yup
-    .string()
-    .matches(
-      /^(0[1-9]|1[0-2])-(0[1-9]|1\d|2\d|3[01])-(19|20)\d{2}$/,
-      'Date of birth must be in the format mm-dd-yyyy'
-    )
-    .required('Date of birth is required'),
+    .date()
+    .required('Date of Birth is required')
+    .nullable(),
 });
 
-const PersonalInformation: React.FC<PersonalWrapper> = ({onNext}) => {
+const PersonalInformation: React.FC<PersonalWrapper> = ({ onNext }) => {
 
   const handleSubmit = (values: PersonalPage) => {
     console.log(values)
@@ -48,55 +47,51 @@ const PersonalInformation: React.FC<PersonalWrapper> = ({onNext}) => {
     validationSchema: validationSchema
   })
 
-  const handleNext =() =>{
+  const handleNext = () => {
     formMik.handleSubmit()
-    if (formMik.isValid){
+    if (formMik.isValid) {
       onNext();
     }
   }
 
   return (
-    <form onSubmit={formMik.handleSubmit}>
-      <div>
-        <Text>Full Name: </Text>
-        <Input name={'fullName'}
-          value={formMik.values.fullName}
-          onChange={formMik.handleChange('fullName')}
-          status={formMik.errors.fullName && 'error'}
-          placeholder="Steve Jobs"
-        />
-        {formMik.errors.fullName && (
-          <Text>{formMik.errors.fullName}</Text>
-        )}
-      </div>
-      <div>
-        <Text>Email Address: </Text>
-        <Input name={'emailAddress'}
-          value={formMik.values.emailAddress}
-          onChange={formMik.handleChange('emailAddress')}
-          status={formMik.errors.emailAddress && 'error'}
-          placeholder="email@example.com"
-        />
-        {formMik.errors.emailAddress && (
-          <Text>{formMik.errors.emailAddress}</Text>
-        )}
-      </div>
-      <div>
-        <Text>Date of Birth: </Text>
-        <Input
-          name={'dateOfBirth'}
-          value={formMik.values.dateOfBirth}
-          onChange={formMik.handleChange('dateOfBirth')}
-          status={formMik.errors.dateOfBirth && 'error'}
-          placeholder="Enter your date of birth (mm-dd-yyyy)"
-        />
-        {formMik.errors.dateOfBirth && (
-          <Text>{formMik.errors.dateOfBirth}</Text>
-        )}
-      </div>
+    <Card title={'Address Information'}>
+      <Form name="basic"
+        labelCol={{ span: 8 }}
+        wrapperCol={{ span: 16 }}
+        style={{ maxWidth: 600,height:260 }}
+        initialValues={{ remember: true }}
+        autoComplete="off">
+        <div>
+          <Text>Full Name: </Text>
+          <Input name={'fullName'}
+            value={formMik.values.fullName}
+            onChange={formMik.handleChange('fullName')}
+            status={formMik.errors.fullName && 'error'}
+          />
+          {formMik.errors.fullName && (
+            <Text >{formMik.errors.fullName}</Text>
+          )}
+        </div>
+        <div>
+          <Text>Email Address: </Text>
+          <Input name={'emailAddress'}
+            value={formMik.values.emailAddress}
+            onChange={formMik.handleChange('emailAddress')}
+            status={formMik.errors.emailAddress && 'error'}
+          />
+          {formMik.errors.emailAddress && (
+            <Text>{formMik.errors.emailAddress}</Text>
+          )}
+        </div>
+        <div>
+          <Text>Date of Birth: </Text>
+          <DatePicker placeholder={'2023-09-16'} />
+        </div>
 
-      <Button type={'primary'} htmlType={"submit"} onClick={handleNext}>Next</Button>
-    </form>
+        <Button style={{margin:'12px'}} type={'primary'} htmlType={"submit"} onClick={handleNext}>Next</Button>
+      </Form>
+    </Card>
   )
 }
 
