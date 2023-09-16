@@ -1,5 +1,4 @@
 # Week 12 Assignment Overview
----
 
 Create a simple registration form using React, Typescript, validation using Formik & Yup, advanced styling using Ant Design.
 
@@ -9,12 +8,8 @@ Create a simple registration form using React, Typescript, validation using Form
 - Ant Design
 - Vite
 
----
-
 ## Deployment Link
 [https://week-12-assignment.netlify.app/](https://week-12-assignment.netlify.app/)
-
----
 
 ## Git Clone Step by Step
 
