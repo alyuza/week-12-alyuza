@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text } from '../../components';
-import { Input, Button, Card } from 'antd';
+import { Input, Button, Card,Form } from 'antd';
 import { useFormik } from 'formik';
 import * as yup from 'yup'
 
@@ -45,9 +45,15 @@ const AccountInformation: React.FC<AccountWrapper> = ({ onPrev }) => {
     validationSchema: validationSchema
   })
 
+  const submit = () => {
+    if (formMik.isValid){
+      formMik.handleSubmit()
+    }
+  }
+
   return (
     <Card title={'Account Information'} style={{ width: 400, height: 350 }}>
-      <form onSubmit={formMik.handleSubmit}>
+      <Form>
         <div>
           <Text>Username: </Text>
           <Input name={'username'}
@@ -73,9 +79,9 @@ const AccountInformation: React.FC<AccountWrapper> = ({ onPrev }) => {
         </div>
         <Button type={'primary'} htmlType={"submit"} onClick={onPrev}
           style={{ margin: '12px' }}>Previous</Button>
-        <Button type={'primary'} htmlType={"submit"}
+        <Button type={'primary'} htmlType={"submit"} onClick={submit}
           style={{ margin: '12px' }}>Submit</Button>
-      </form>
+      </Form>
     </Card>
   )
 }

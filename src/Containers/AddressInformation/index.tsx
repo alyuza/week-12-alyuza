@@ -1,7 +1,6 @@
 import { Text } from '../../components';
-import { Input, Button, Card } from 'antd';
+import { Input, Button, Card, Form } from 'antd';
 import { useFormik } from 'formik';
-import React from 'react';
 import * as yup from 'yup'
 
 interface AddressPage {
@@ -53,7 +52,7 @@ const AddressInformation: React.FC<AddressWrapper> = ({ onNext, onPrev }) => {
   });
 
   const handleNext = () => {
-
+    formMik.handleSubmit()
     if (formMik.isValid) {
       onNext();
     }
@@ -61,7 +60,7 @@ const AddressInformation: React.FC<AddressWrapper> = ({ onNext, onPrev }) => {
 
   return (
     <Card title={'Address Information'}>
-      <form>
+      <Form>
         <div>
           <Text>Street Address: </Text>
           <Input name={'streetAddress'}
@@ -106,11 +105,9 @@ const AddressInformation: React.FC<AddressWrapper> = ({ onNext, onPrev }) => {
             <Text>{formMik.errors.zipCode}</Text>
           )}
         </div>
-        <Button type={'primary'} htmlType={"submit"} onClick={onPrev}
-          style={{ margin: '12px' }}>Previous</Button>
-        <Button type={'primary'} htmlType={"submit"} onClick={handleNext}
-          style={{ margin: '12px' }}>Next</Button>
-      </form>
+        <Button style={{ margin: '12px' }} type={'primary'} htmlType={"submit"} onClick={onPrev} >Previous</Button>
+        <Button style={{ margin: '12px' }} type={'primary'} htmlType={"submit"} onClick={handleNext} >Next</Button>
+      </Form>
     </Card>
   )
 }

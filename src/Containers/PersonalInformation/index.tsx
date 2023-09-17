@@ -1,6 +1,5 @@
-import React from 'react';
 import { Text } from '../../components';
-import { Card, Button, Form, Input } from 'antd';
+import { Card, Button, Input,Form } from 'antd';
 import { useFormik } from 'formik';
 import { DatePicker } from 'antd';
 import * as yup from 'yup'
@@ -10,6 +9,9 @@ interface PersonalPage {
   emailAddress: string;
   dateOfBirth: Date;
 }
+interface PersonalWrapper {
+  onNext: () => void;
+}
 
 const initialValues = {
   fullName: 'Steve Jobs',
@@ -17,9 +19,6 @@ const initialValues = {
   dateOfBirth: new Date()
 }
 
-interface PersonalWrapper {
-  onNext: () => void;
-}
 
 const validationSchema = yup.object({
   fullName: yup
@@ -56,12 +55,7 @@ const PersonalInformation: React.FC<PersonalWrapper> = ({ onNext }) => {
 
   return (
     <Card title={'Address Information'}>
-      <Form name="basic"
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 16 }}
-        style={{ maxWidth: 600,height:260 }}
-        initialValues={{ remember: true }}
-        autoComplete="off">
+      <Form>
         <div>
           <Text>Full Name: </Text>
           <Input name={'fullName'}
