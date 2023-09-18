@@ -16,7 +16,7 @@ Create a simple registration form using React, Typescript, validation using Form
 1. Open your terminal
 2. Git clone this project
 
-`https://github.com/RevoU-FSSE-2/week-12-SherinOlivia.git`
+`https://github.com/RevoU-FSSE-2/week-12-alyuza.git`
 
 3. Then `npm install` and `npm run dev` to create a localhost
 
