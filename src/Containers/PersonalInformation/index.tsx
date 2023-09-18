@@ -1,13 +1,12 @@
 import { Text } from '../../components';
-import { Card, Button, Input,Form } from 'antd';
+import { Card, Button, Input, Form } from 'antd';
 import { useFormik } from 'formik';
-import { DatePicker } from 'antd';
 import * as yup from 'yup'
 
 interface PersonalPage {
   fullName: string;
   emailAddress: string;
-  dateOfBirth: Date;
+  dateOfBirth: string;
 }
 interface PersonalWrapper {
   onNext: () => void;
@@ -16,9 +15,8 @@ interface PersonalWrapper {
 const initialValues = {
   fullName: 'Steve Jobs',
   emailAddress: 'email@example.com',
-  dateOfBirth: new Date()
+  dateOfBirth: '09-18-1997'
 }
-
 
 const validationSchema = yup.object({
   fullName: yup
@@ -29,9 +27,9 @@ const validationSchema = yup.object({
     .email("Please insert a valid email address")
     .required("Email address can't be blank"),
   dateOfBirth: yup
-    .date()
+    .string()
     .required('Date of Birth is required')
-    .nullable(),
+    .matches(/^(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])-\d{4}$/, 'date format mm-dd-yyyy')
 });
 
 const PersonalInformation: React.FC<PersonalWrapper> = ({ onNext }) => {
@@ -80,10 +78,17 @@ const PersonalInformation: React.FC<PersonalWrapper> = ({ onNext }) => {
         </div>
         <div>
           <Text>Date of Birth: </Text>
-          <DatePicker placeholder={'2023-09-16'} />
+          <Input name={'dateOfBirth'}
+            value={formMik.values.dateOfBirth}
+            onChange={formMik.handleChange('dateOfBirth')}
+            status={formMik.errors.dateOfBirth && 'error'}
+          />
+          {formMik.errors.dateOfBirth && (
+            <Text>{formMik.errors.dateOfBirth}</Text>
+          )}
         </div>
 
-        <Button style={{margin:'12px'}} type={'primary'} htmlType={"submit"} onClick={handleNext}>Next</Button>
+        <Button style={{ margin: '12px' }} type={'primary'} htmlType={"submit"} onClick={handleNext}>Next</Button>
       </Form>
     </Card>
   )
