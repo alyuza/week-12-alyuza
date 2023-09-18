@@ -67,6 +67,7 @@ const AddressInformation: React.FC<AddressWrapper> = ({ onNext, onPrev }) => {
             value={formMik.values.streetAddress}
             onChange={formMik.handleChange('streetAddress')}
             status={formMik.errors.streetAddress && 'error'}
+            placeholder='Perumahan Galaxy'
           />
           {formMik.errors.streetAddress && (
             <Text>{formMik.errors.streetAddress}</Text>
@@ -78,6 +79,7 @@ const AddressInformation: React.FC<AddressWrapper> = ({ onNext, onPrev }) => {
             value={formMik.values.city}
             onChange={formMik.handleChange('city')}
             status={formMik.errors.city && 'error'}
+            placeholder='Surabaya'
           />
           {formMik.errors.city && (
             <Text>{formMik.errors.city}</Text>
@@ -89,6 +91,7 @@ const AddressInformation: React.FC<AddressWrapper> = ({ onNext, onPrev }) => {
             value={formMik.values.state}
             onChange={formMik.handleChange('state')}
             status={formMik.errors.state && 'error'}
+            placeholder='Indonesia'
           />
           {formMik.errors.state && (
             <Text>{formMik.errors.state}</Text>
@@ -100,6 +103,7 @@ const AddressInformation: React.FC<AddressWrapper> = ({ onNext, onPrev }) => {
             value={formMik.values.zipCode}
             onChange={formMik.handleChange('zipCode')}
             status={formMik.errors.zipCode && 'error'}
+            placeholder='66218'
           />
           {formMik.errors.zipCode && (
             <Text>{formMik.errors.zipCode}</Text>

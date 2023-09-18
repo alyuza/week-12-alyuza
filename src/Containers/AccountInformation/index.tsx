@@ -60,6 +60,7 @@ const AccountInformation: React.FC<AccountWrapper> = ({ onPrev }) => {
             value={formMik.values.username}
             onChange={formMik.handleChange('username')}
             status={formMik.errors.username && 'error'}
+            placeholder='user'
           />
           {formMik.errors.username && (
             <Text>{formMik.errors.username}</Text>
@@ -72,6 +73,7 @@ const AccountInformation: React.FC<AccountWrapper> = ({ onPrev }) => {
             value={formMik.values.password}
             onChange={formMik.handleChange('password')}
             status={formMik.errors.password && 'error'}
+            placeholder='************'
           />
           {formMik.errors.password && (
             <Text>{formMik.errors.password}</Text>

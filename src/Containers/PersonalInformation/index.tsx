@@ -60,6 +60,7 @@ const PersonalInformation: React.FC<PersonalWrapper> = ({ onNext }) => {
             value={formMik.values.fullName}
             onChange={formMik.handleChange('fullName')}
             status={formMik.errors.fullName && 'error'}
+            placeholder='Aliando'
           />
           {formMik.errors.fullName && (
             <Text >{formMik.errors.fullName}</Text>
@@ -71,6 +72,7 @@ const PersonalInformation: React.FC<PersonalWrapper> = ({ onNext }) => {
             value={formMik.values.emailAddress}
             onChange={formMik.handleChange('emailAddress')}
             status={formMik.errors.emailAddress && 'error'}
+            placeholder='email@example.com'
           />
           {formMik.errors.emailAddress && (
             <Text>{formMik.errors.emailAddress}</Text>
