@@ -82,6 +82,7 @@ const PersonalInformation: React.FC<PersonalWrapper> = ({ onNext }) => {
             value={formMik.values.dateOfBirth}
             onChange={formMik.handleChange('dateOfBirth')}
             status={formMik.errors.dateOfBirth && 'error'}
+            placeholder='mm-dd-yyyy'
           />
           {formMik.errors.dateOfBirth && (
             <Text>{formMik.errors.dateOfBirth}</Text>
